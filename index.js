@@ -25,6 +25,7 @@ let installDevDependencies = (dir) => {
     'svgxuse'
   ], {
     cwd: dir,
+    shell: true,
     stdio: 'inherit'
   });
 };
@@ -45,12 +46,6 @@ let createPackageJSON = (dir, data) => {
       preview: './node_modules/.bin/front-end-styleguide preview',
       production: './node_modules/.bin/front-end-styleguide production',
       update: './node_modules/.bin/front-end-styleguide update'
-    },
-    devDependencies: {
-      'babel-preset-es2015': '^6.9.0',
-      'front-end-styleguide': '^2.1.3',
-      'normalize.css': '^5.0.0',
-      'svgxuse': '^1.1.23'
     }
   };
 
@@ -63,8 +58,15 @@ let createPackageJSON = (dir, data) => {
       return console.error(error);
     }
 
-    spawn('npm', ['install'], {
+    spawn('npm', [
+      'install', '--save-dev',
+      'babel-preset-es2015',
+      'front-end-styleguide',
+      'normalize.css',
+      'svgxuse'
+    ], {
       cwd: dir,
+      shell: true,
       stdio: 'inherit'
     });
   });
