@@ -9,6 +9,6 @@ Use within another module:
 ```js
 const init = require('front-end-styleguide-init');
 
-// `dir` is the directory where the styleguide be initialized
+// `dir` is the directory where the styleguide will be initialized
 init(dir);
 ```
