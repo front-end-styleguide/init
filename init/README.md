@@ -27,12 +27,12 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 
 ## Installation
-Make sure `front-end-styleguide` is installed globally with `npm install -g front-end-styleguide`.
-If you installed the styleguide locally you have to run `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
+Make sure CLI is installed globally with `npm install -g front-end-styleguide-cli`.
+If you don't want to or cannot install the CLI you have to use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
 
 Run `npm install` to get all dependencies. `npm update` will update already installed dependencies.
 
-*Check for outdated modules with `npm outdated`.*
+*To check for outdated packages without updating them run `npm outdated`.*
 
 
 ## Configuration
