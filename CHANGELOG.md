@@ -2,6 +2,14 @@
 
 
 
+## 1.0.2
+2016-12-04
+
+## Fixed
+- Line endings for npm package
+
+
+
 ## 1.0.1
 2016-12-03
 
