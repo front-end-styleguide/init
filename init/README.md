@@ -30,7 +30,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 Make sure CLI is installed globally with `npm install -g front-end-styleguide-cli`.
 If you don't want to or cannot install the CLI you have to use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
 
-Run `npm install` to get all dependencies. `npm update` will update already installed dependencies.
+Run `npm install` to get all dependencies. `npm update` will install and update all dependencies.
 
 *To check for outdated packages without updating them run `npm outdated`.*
 
@@ -74,7 +74,7 @@ There are more tasks available for standalone execution:
 Located in `src/css`.  
 Output to `dev/css`, `prev/css` or `dist/css`.
 
-*Sass* is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide).
+[Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide).
 
 This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [HTML](#html) for the HTML-side of componentization.
 
@@ -98,12 +98,14 @@ Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`
 Located in `src/html`.  
 Output to `dev` or `prev`.
 
-*Handlebars* is an HTML templating engine based on JavaScript. The styleguide creates static HTML from Handlebars files.
+[Handlebars](http://handlebarsjs.com/) is an HTML templating engine based on JavaScript. The styleguide creates static HTML from Handlebars files. [Assemble helpers](https://github.com/assemble/handlebars-helpers) provide more advanced templating features.
 
 Hierarchy with subfolders is supported. The output reflects the input file tree.
 
 
 #### Layouts
+Layout helpers provided by [Handlebars Layouts](https://github.com/shannonmoeller/handlebars-layouts).
+
 Layouts determine the scaffolding of the HTML document. They contain the `<head>` area, the outer `<body>` tags, style and script references.
 
 Layouts are located in `src/html/partials/layouts`.
@@ -128,7 +130,7 @@ These files can be included in all other files (even in other includes). The pro
 
 Includes are located in `src/html/partials/includes`.
 
-The syntax `{{> "includes/example"}}` includes the file `src/html/partials/includes/example.hbs`.
+The syntax `{{> includes/example}}` includes the file `src/html/partials/includes/example.hbs`.
 
 
 #### Components and Pages
@@ -136,7 +138,7 @@ Component pages are references for UI elements. The task `preview` will not rend
 
 Pages are prototypes for the final web pages.
 
-The `default` task injects a navigation bar into both component and page HTML files for fast site switching and additional settings.
+The `default` and `development` tasks inject a navigation bar into both component and page HTML files for faster site switching and additional settings.
 
 Components are located in `src/html/pages/components`, pages in `src/html/pages`.
 
@@ -192,18 +194,18 @@ Output to `dev/img`, `prev/img` or `dist/img`.
 
 All files and folders placed in `src/img` will be copied to `dev/img`, `prev/img` or `dist/img`.
 
-SVG files placed in the `src/img/icons` folder will be transformed into an SVG icon sprite named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/img/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
+SVG files placed in the `src/img/icons` folder will be transformed into an [SVG icon sprite](https://github.com/jkphl/gulp-svg-sprite) named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/img/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
 
 Icons can be used in HTML with the following syntax:
 ```html
 <svg width="24" height="24">
-  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use>
+  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"/>
 </svg>
 ```
 
-Specifying intrinsic dimensions is considered good style. Without an intrinsic width and height browsers often scale SVGs to fill the whole viewport. This happens if dimensions set in CSS fail to load.
+Specifying dimensions is considered good style. Without a defined width and height browsers often scale SVGs to fill the whole viewport. This happens if dimensions set in CSS fail to load.
 
-This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.
+The styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.
 
 *The preview and production tasks minify images with a lossless compressor.*
 
