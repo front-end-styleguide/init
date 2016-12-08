@@ -199,7 +199,7 @@ SVG files placed in the `src/img/icons` folder will be transformed into an [SVG 
 Icons can be used in HTML with the following syntax:
 ```html
 <svg width="24" height="24">
-  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"/>
+  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use>
 </svg>
 ```
 
