@@ -4,7 +4,7 @@
   "description": "Init for front-end-styleguide",
   "author": "Fynn Becker <info@fynn-becker.de>",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --ignore-pattern init **/*.js",
+    "lint": "eslint **/*.js",
     "pretest": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
