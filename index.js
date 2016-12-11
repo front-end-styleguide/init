@@ -58,17 +58,7 @@ let createPackageJSON = (dir, data) => {
       return console.error(error);
     }
 
-    spawn('npm', [
-      'install', '--save-dev',
-      'babel-preset-es2015',
-      'front-end-styleguide',
-      'normalize.css',
-      'svgxuse'
-    ], {
-      cwd: dir,
-      shell: true,
-      stdio: 'inherit'
-    });
+    installDevDependencies(dir);
   });
 };
 
