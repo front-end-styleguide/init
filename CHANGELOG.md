@@ -2,6 +2,20 @@
 
 
 
+## 1.0.3
+2016-12-17
+
+## Improved
+- Init README.md
+- Init content
+- Re-use already declared function
+
+## Added
+- Linting task
+- EditorConfig
+
+
+
 ## 1.0.2
 2016-12-04
 
