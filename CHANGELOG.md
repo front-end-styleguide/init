@@ -2,6 +2,17 @@
 
 
 
+## 1.1.0
+2016-31-12
+
+## Improved
+- Init README.md
+
+## Added
+- stylelint
+
+
+
 ## 1.0.3
 2016-12-17
 
