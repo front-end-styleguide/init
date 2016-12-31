@@ -2,7 +2,7 @@
 
 Living Styleguide for componentized front end development.
 
-Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/), [lint](http://eslint.org/) JavaScript, [transpile](https://babeljs.io/) ES6 Code and create static HTML from [Handlebars](http://handlebarsjs.com/).
+Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](http://stylelint.io/) [Sass](http://sass-lang.com/), [lint](http://eslint.org/) JavaScript, [transpile](https://babeljs.io/) ES6 Code and create static HTML from [Handlebars](http://handlebarsjs.com/).
 
 
 ## Contents
@@ -62,7 +62,9 @@ These are the main tasks:
 
 There are more tasks available for standalone execution:
 * `css-dev`, `css-prev` and `css-dist` for Sass compilation.
-* `js-dev`, `js-prev` and `js-dist` for JavaScript concatenation and linting.
+* `css-lint` and `css-lint-break` for CSS linting.
+* `js-dev`, `js-prev` and `js-dist` for JavaScript concatenation.
+* `js-lint` and `js-lint-break` for JavaScript linting.
 * `html-dev` and `html-prev` for static HTML file generation.
 * `img-dev`, `img-prev` and `img-dist` for image copying and icon sprite generation.
 * `copy-dev`, `copy-prev` and `copy-dist` for copying files from Node modules.
@@ -74,11 +76,13 @@ There are more tasks available for standalone execution:
 Located in `src/css`.  
 Output to `dev/css`, `prev/css` or `dist/css`.
 
-[Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide).
+[Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide). [stylelint](http://stylelint.io/) monitors the code for errors and consistency deviations.
 
 This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [HTML](#html) for the HTML-side of componentization.
 
 The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
+
+Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-enable selector-no-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
 
 *The development task generates sourcemaps. The preview and production tasks minify the CSS.*
 
