@@ -3,7 +3,7 @@
 
 
 ## 1.1.0
-2016-31-12
+2016-12-31
 
 ## Improved
 - Init README.md
