@@ -55,7 +55,7 @@ let createPackageJSON = (dir, data) => {
 
   fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', (error) => {
     if (error) {
-      return console.error(error);
+      console.error(error);
     }
 
     installDevDependencies(dir);
@@ -92,20 +92,26 @@ dist
 
   fs.writeFile(`${dir}/.gitignore`, gitignore, (error) => {
     if (error) {
-      return console.error(error);
+      console.error(error);
     }
   });
 };
 
 
 
-/* COPY EXAMPLE CONTENT
+/* COPY EXAMPLE PROJECT
  * ========================================================================== */
 
-let copyExampleContent = (dir) => {
-  fs.copy(`${__dirname}/init`, dir, (error) => {
+let createExampleContent = (dir, createExample) => {
+  fs.copy(`${__dirname}/init/${createExample ? 'example' : 'bare'}`, dir, (error) => {
     if (error) {
-      return console.error(error);
+      console.error(error);
+    }
+  });
+
+  fs.copy(`${__dirname}/init/always`, `${dir}`, (error) => {
+    if (error) {
+      console.error(error);
     }
   });
 };
@@ -124,6 +130,17 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
     properties: {
       useWizard: {
         description: 'Generate package.json',
+        message: 'Please answer with Y or N.',
+        type: 'string',
+        pattern: /^(Y|N)$/i,
+        default: 'Y',
+        required: true,
+        before: (value) => {
+          return value.toUpperCase() === 'Y';
+        }
+      },
+      createExample: {
+        description: 'Create example project',
         message: 'Please answer with Y or N.',
         type: 'string',
         pattern: /^(Y|N)$/i,
@@ -197,7 +214,15 @@ ${chalk.italic('Installing npm packages…')}
     } else {
       createPackageJSON(dir, result);
       createGitignore(dir);
-      copyExampleContent(dir);
+      createExampleContent(dir, result.createExample);
     }
   });
 };
+
+
+
+/* EXPOSE DEFAULT CONFIGURATION FILES
+ * ========================================================================== */
+
+module.exports.configFile = require('./init/always/config/config.json');
+module.exports.pathsFile  = require('./init/always/config/paths.json');

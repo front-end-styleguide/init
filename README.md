@@ -7,12 +7,23 @@ This package creates the basic file structure needed for the [https://github.com
 
 Install with `npm install --save-dev front-end-styleguide-init`.
 
-Use within another module:
+Integrate into other modules:
 ```js
+// Import the init package
 const frontEndStyleguideInit = require('front-end-styleguide-init');
 
 // `dir` is the directory where the styleguide will be initialized
 frontEndStyleguideInit(dir);
+```
+
+The default configuration files are exposed for use in another module:
+```js
+// Import the init package
+const frontEndStyleguideInit = require('front-end-styleguide-init');
+
+// Import default configuration files
+let configFile = frontEndStyleguideInit.configFile;
+let pathsFile  = frontEndStyleguideInit.pathsFile;
 ```
 
 
