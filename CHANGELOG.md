@@ -2,6 +2,14 @@
 
 
 
+## 1.2.0
+2017-01-03
+
+## Improved
+- Split into `bare` and `example` project creation
+
+
+
 ## 1.1.0
 2016-12-31
 
