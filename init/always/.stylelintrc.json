@@ -160,9 +160,6 @@
     "no-empty-source": true,
     "no-eol-whitespace": true,
     "no-extra-semicolons": true,
-    "no-indistinguishable-colors": [true, {
-      "severity": "warning"
-    }],
     "no-missing-end-of-source-newline": true,
     "no-unknown-animations": true
   }
