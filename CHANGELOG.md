@@ -2,6 +2,20 @@
 
 
 
+## 1.2.1
+2017-01-20
+
+## Improved
+- Renamed `.gitinclude` to `.gitkeep`
+
+## Added
+- Component body class
+
+## Removed
+- `no-indistinguishable-colors` stylelint rule
+
+
+
 ## 1.2.0
 2017-01-03
 
