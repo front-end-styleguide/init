@@ -202,16 +202,20 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
   prompt.message = null;
 
   prompt.get(schema, (error, result) => {
-    console.log(`
+    const successMessage = `
 ${chalk.green(`Thank you. That's it!`)}
 Just wait a few more seconds for the finishing touches.
 
 ${chalk.italic('Installing npm packages…')}
-`);
+`;
 
-    if (!result.useWizard) {
+    if (!result) {
+      console.log('Initialization cancelled!');
+    } else if (!result.useWizard) {
+      console.log(successMessage);
       installDevDependencies(dir);
     } else {
+      console.log(successMessage);
       createPackageJSON(dir, result);
       createGitignore(dir);
       createExampleContent(dir, result.createExample);
