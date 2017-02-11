@@ -2,6 +2,17 @@
 
 
 
+## 1.2.2
+2017-02-11
+
+### Improved
+- Better handling for cancel event
+
+## Updated
+- Dependencies
+
+
+
 ## 1.2.1
 2017-01-20
 
