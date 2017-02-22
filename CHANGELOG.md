@@ -2,6 +2,20 @@
 
 
 
+## 1.2.3
+2017-02-22
+
+### Added
+- stylelint disallows nested BEM classes
+
+### Fixed
+- README.md issue
+
+### Removed
+- Deprecated stylelint rules
+
+
+
 ## 1.2.2
 2017-02-11
 
