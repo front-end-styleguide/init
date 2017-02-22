@@ -22,7 +22,7 @@
 ### Improved
 - Better handling for cancel event
 
-## Updated
+### Updated
 - Dependencies
 
 
@@ -30,13 +30,13 @@
 ## 1.2.1
 2017-01-20
 
-## Improved
+### Improved
 - Renamed `.gitinclude` to `.gitkeep`
 
-## Added
+### Added
 - Component body class
 
-## Removed
+### Removed
 - `no-indistinguishable-colors` stylelint rule
 
 
@@ -44,7 +44,7 @@
 ## 1.2.0
 2017-01-03
 
-## Improved
+### Improved
 - Split into `bare` and `example` project creation
 
 
@@ -52,10 +52,10 @@
 ## 1.1.0
 2016-12-31
 
-## Improved
+### Improved
 - Init README.md
 
-## Added
+### Added
 - stylelint
 
 
@@ -63,12 +63,12 @@
 ## 1.0.3
 2016-12-17
 
-## Improved
+### Improved
 - Init README.md
 - Init content
 - Re-use already declared function
 
-## Added
+### Added
 - Linting task
 - EditorConfig
 
@@ -77,7 +77,7 @@
 ## 1.0.2
 2016-12-04
 
-## Fixed
+### Fixed
 - Line endings for npm package
 
 
@@ -85,10 +85,10 @@
 ## 1.0.1
 2016-12-03
 
-## Improved
+### Improved
 - Always install latest dependencies
 
-## Fixed
+### Fixed
 - init/README.md errors
 
 
@@ -96,5 +96,5 @@
 ## 1.0.0
 2016-12-03
 
-## Added
+### Added
 - Set up initialization process
