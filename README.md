@@ -27,6 +27,11 @@ let pathsFile  = frontEndStyleguideInit.pathsFile;
 ```
 
 
+## Test
+
+To test this package run `npm test`. Please note: This is not an automated test. It requires command line inputs and manual inspection of the `test/temp` output folder.
+
+
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide-init.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide-init
 
