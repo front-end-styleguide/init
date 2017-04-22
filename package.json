@@ -1,6 +1,6 @@
 {
   "name": "front-end-styleguide-init",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Init for front-end-styleguide",
   "author": "Fynn Becker <info@fynn-becker.de>",
   "scripts": {

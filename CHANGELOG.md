@@ -2,6 +2,17 @@
 
 
 
+## 1.2.4
+2017-03-22
+
+### Added
+- (Manual) test (see README.md)
+
+### Improved
+- Split dependency installation into dev and non-dev
+
+
+
 ## 1.2.3
 2017-02-22
 
