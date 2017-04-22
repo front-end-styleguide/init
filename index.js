@@ -13,16 +13,26 @@ const spawn  = require('child_process').spawn;
 
 
 
-/* INSTALL DEV DEPENDENCIES
+/* INSTALL DEPENDENCIES
  * ========================================================================== */
+
+let installDependencies = (dir) => {
+  spawn('npm', [
+    'install', '--save',
+    'normalize.css',
+    'svgxuse'
+  ], {
+    cwd: dir,
+    shell: true,
+    stdio: 'inherit'
+  });
+};
 
 let installDevDependencies = (dir) => {
   spawn('npm', [
     'install', '--save-dev',
     'babel-preset-es2015',
-    'front-end-styleguide',
-    'normalize.css',
-    'svgxuse'
+    'front-end-styleguide'
   ], {
     cwd: dir,
     shell: true,
@@ -53,11 +63,14 @@ let createPackageJSON = (dir, data) => {
     packageJSON.author = `${data.authorName} <${data.authorEmail}>`;
   }
 
+  fs.ensureDirSync(dir);
+
   fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', (error) => {
     if (error) {
       console.error(error);
     }
 
+    installDependencies(dir);
     installDevDependencies(dir);
   });
 };
@@ -89,6 +102,8 @@ dev
 prev
 dist
 `;
+
+  fs.ensureDirSync(dir);
 
   fs.writeFile(`${dir}/.gitignore`, gitignore, (error) => {
     if (error) {
