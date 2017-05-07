@@ -2,7 +2,7 @@
 
 Living Styleguide for componentized front end development.
 
-Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](http://stylelint.io/) [Sass](http://sass-lang.com/), [lint](http://eslint.org/) JavaScript, [transpile](https://babeljs.io/) ES6 Code and create static HTML from [Handlebars](http://handlebarsjs.com/).
+Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](https://stylelint.io/) [Sass](http://sass-lang.com/), [lint](http://eslint.org/) and [transpile](https://babeljs.io/) ES6 Code and create static HTML from [Nunjucks](https://mozilla.github.io/nunjucks/).
 
 
 ## Contents
@@ -23,12 +23,10 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](http://sty
 * [Node.js with npm](https://nodejs.org/)
 * [Front End Styleguide](https://github.com/mvsde/styleguide)
 
-*Only tested with Node.js v6.9.1 and v7.2.0. An update from 6 to 7 may require a full re-install of dependencies.*
-
 
 ## Installation
 Make sure CLI is installed globally with `npm install -g front-end-styleguide-cli`.
-If you don't want to or cannot install the CLI you have to use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
+If you don't want to or cannot install the CLI please use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
 
 Run `npm install` to get all dependencies. `npm update` will install and update all dependencies.
 
@@ -37,9 +35,103 @@ Run `npm install` to get all dependencies. `npm update` will install and update 
 
 ## Configuration
 
-The files `config/config.json` and `config/paths.json` can be used to customize specific task settings and the source and destination folders.
+### Styleguide
+`config/config.json`
 
-`.babelrc` and `.eslintrc.json` files are also available for Babel and ESLint configuration.
+```js
+{
+  "css": {
+    "dev": {
+     /* Sass options */
+    },
+    "dist": {
+      /* Sass options */
+    },
+    "autoprefixer": {
+      /* Autoprefixer options */
+    }
+  },
+  "html": {
+    "browsersync": {
+      /* Browsersync options */
+    }
+  },
+  "img": {
+    "svgSpriteDev": {
+      /* SVG Sprite options */
+    },
+    "svgSpriteDist": {
+      /* SVG Sprite options */
+    },
+    "imagemin": {
+      /* Imagemin options */
+    }
+  }
+}
+```
+
+`config/paths.json`
+
+```json
+{
+  "output": {
+    "css": {
+      "path": "css",
+      "name": "styles.css"
+    },
+    "js": {
+      "path": "js",
+      "name": "scripts.js"
+    },
+    "img": {
+      "path": "img",
+      "icons": "icons.svg"
+    }
+  }
+}
+```
+
+### Dotfiles
+
+* `.babelrc`: [Configuration for Babel](https://babeljs.io/docs/usage/babelrc/)
+* `.editorconfig`: [Set basic rules for editors/IDEs](http://editorconfig.org/)
+* `.eslintignore`: [Files ignored by ESLint](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)
+* `.eslintrc.json`: [Configuration and rules for ESLint](http://eslint.org/docs/user-guide/configuring)
+* `.stylelintrc.json`: [Configuration and rules for Stylelint](https://stylelint.io/user-guide/configuration/)
+
+
+## Folder Structure
+```
+.
+├── config
+|   ├── components
+|   |   |── example
+|   |   |   |── default.guide.njk
+|   |   |   |── default.njk
+|   |   |   |── scripts.js
+|   |   |   └── styles.scss
+|   |   └── icons
+|   |       |── usage.guide.svg
+|   |       └── menu.svg
+|   ├── images
+|   |   └── img-name.png
+|   ├── layouts
+|   |   |── components.njk
+|   |   └── prototypes.njk
+|   ├── prototypes
+|   |   └── index.njk
+|   ├── setup
+|   |   |── scaffolding.scss
+|   |   └── variables.scss
+|   ├── copy.js
+|   ├── main.js
+|   └── main.scss
+├── .babelrc
+├── .editorconfig
+├── .eslintignore
+├── .eslint.rc
+└── .stylelintrc.json
+```
 
 
 ## Usage
@@ -61,26 +153,25 @@ These are the main tasks:
   * Errors break pipe.
 
 There are more tasks available for standalone execution:
-* `css-dev`, `css-prev` and `css-dist` for Sass compilation.
-* `css-lint` and `css-lint-break` for CSS linting.
-* `js-dev`, `js-prev` and `js-dist` for JavaScript concatenation.
-* `js-lint` and `js-lint-break` for JavaScript linting.
-* `html-dev` and `html-prev` for static HTML file generation.
-* `img-dev`, `img-prev` and `img-dist` for image copying and icon sprite generation.
-* `copy-dev`, `copy-prev` and `copy-dist` for copying files from Node modules.
+* `css:dev`, `css:prev` and `css:dist` for Sass compilation.
+* `css:lint` and `css:lint:break` for CSS linting.
+* `js:dev`, `js:prev` and `js:dist` for JavaScript concatenation.
+* `js:lint` and `js:lint:break` for JavaScript linting.
+* `html:dev` and `html:prev` for static HTML file generation.
+* `img:dev`, `img:prev` and `img:dist` for image copying and icon sprite generation.
+* `copy:dev`, `copy:prev` and `copy:dist` for copying files from Node modules.
 
 *The generated folders `dev`, `prev` and `dist` are excluded from Git.*
 
 
 ### CSS
-Located in `src/css`.  
 Output to `dev/css`, `prev/css` or `dist/css`.
 
 [Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide). [stylelint](http://stylelint.io/) monitors the code for errors and consistency deviations.
 
-This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [HTML](#html) for the HTML-side of componentization.
+This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own folder and is re-usable across the project.
 
-The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
+The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/main.scss` for more information.
 
 Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-enable selector-no-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
 
@@ -88,122 +179,70 @@ Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.sty
 
 
 ### JavaScript
-Located in `src/js`.  
 Output to `dev/js`, `prev/js` or `dist/js`.
 
-JavaScript files are bundled together with [Browserify](http://browserify.org/) and transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. [ESLint](http://eslint.org) checks if the code follows common standards.
+JavaScript files are bundled together with [Browserify](http://browserify.org/) and transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. To learn more about JavaScript modules head over to the [MDN article about `import`](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/import). [ESLint](http://eslint.org) checks if the code follows the [JavaScript Standard Style](https://standardjs.com/).
 
-Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`. Per-file rules can be set with comments (e.g. `/* eslint no-console: "off" */`). With a `.eslintignore` file in the project root, JavaScript files can be [excluded from linting](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories). Browserify follows the same `require()` and `modules.exports` system Node uses. This makes loading code from other files or even npm modules very easy. The example setup in `src/js` provides a brief overview of the capabilities.
+Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`. Per-file rules can be set with comments (e.g. `/* eslint no-console: "off" */`). With a `.eslintignore` file in the project root, JavaScript files can be [excluded from linting](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories).
 
 *The development task generates sourcemaps. The preview and production tasks uglify the source.*
 
 
 ### HTML
-Located in `src/html`.  
-Output to `dev` or `prev`.
+Output to `dev` and `dev/components` or `prev`.
 
-[Handlebars](http://handlebarsjs.com/) is an HTML templating engine based on JavaScript. The styleguide creates static HTML from Handlebars files. [Assemble helpers](https://github.com/assemble/handlebars-helpers) provide more advanced templating features.
-
-Hierarchy with subfolders is supported. The output reflects the input file tree.
+[Nunjucks](https://mozilla.github.io/nunjucks/) is an HTML templating engine based on JavaScript. The styleguide creates static HTML from Nunjucks files. Take a look at the [templating docs](https://mozilla.github.io/nunjucks/templating.html) for further information.
 
 
-#### Layouts
-Layout helpers provided by [Handlebars Layouts](https://github.com/shannonmoeller/handlebars-layouts).
+#### Components
+Component pages are references for UI elements. They will be generated only if the component folder contains at least on `*.guide.njk` file. Each of these files represent a section within the component page, ordered by filename. The task `preview` will not render component pages.
 
-Layouts determine the scaffolding of the HTML document. They contain the `<head>` area, the outer `<body>` tags, style and script references.
+Each `component-name/*.guide.njk` file should follow this pattern for a styled frame:
+```njk
+{% set title = "Default" %}
+{% set description = "Just a little component." %}
 
-Layouts are located in `src/html/partials/layouts`.
+{% extends sgSection %}
 
-A minimalistic layout may look like this:
-```handlebars
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{{page 'title'}}</title>
-  </head>
-  <body>
-    {{{block "content"}}}
-  </body>
-</html>
+{% block body %}
+  {% include "./default.njk" %}
+{% endblock %}
 ```
 
-
-#### Includes
-These files can be included in all other files (even in other includes). The process is comparable to PHP's `include`.
-
-Includes are located in `src/html/partials/includes`.
-
-The syntax `{{> includes/example}}` includes the file `src/html/partials/includes/example.hbs`.
-
-
-#### Components and Pages
-Component pages are references for UI elements. The task `preview` will not render them.
-
-Pages are prototypes for the final web pages.
-
-The `default` and `development` tasks inject a navigation bar into both component and page HTML files for faster site switching and additional settings.
-
-Components are located in `src/html/pages/components`, pages in `src/html/pages`.
-
-The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and category. These will be used primarily by layouts and the Styleguide navigation. The front matter can be accessed with `{{page "key"}}`. Replace `key` with the name from the front matter.
-
-A simple component page is defined by it's category and the correspondening layout:
-```handlebars
----
-title: Example
-description: More detailed than the title
-category: Components
----
-{{#extend "layouts/components"}}
-{{#content "body"}}
-  <p>This will be injected into the layout.</p>
-{{/content}}
-{{/extend}}
-```
-
-Components may use additional markup within the main body with nicely styled containers:
-```handlebars
-{{#embed "styleguide/article" title="Some title" description="Some description text." background="#555"}}
-{{#content "body"}}
-  <p>The component goes here and will be wrapped in a nicely formatted container.</p>
-{{/content}}
-{{/embed}}
-```
-
-The following parameters are available:
+The following variables can be used:
 * [optional] `title` sets a heading for the component variation.
 * [optional] `description` provides additional information.
 * [optional] `background` injects `style="background: value"` into the component.
+* [optional] `padding` sets the padding.
+
+
+#### Prototypes
+Prototypes represent final pages. The prototypes folder support hierarchy with subfolders. Go ahead and try out a basic website structure!
+
+The `default` and `development` tasks inject a navigation bar into both component and prototype HTML files for faster site switching and additional settings.
 
 
 #### Default Variables
 
-* `{{meta.version}}`: Current styleguide version (e.g. "1.7.0").
-* `{{meta.lang}}`: Global project language (e.g. "en").
-* `{{meta.dev}}`: Returns true for development task.
-* `{{page "title"}}`: Title of the current page.
-* `{{page "description"}}`: Description of the current page.
-* `{{page "category"}}`: Category of the current page.
-* `{{page "filebase"}}`: The name of the current page file without extension (e.g. "index").
-* `{{page "filename"}}`: The name of the current page file with extension (e.g. "index.html").
-* `{{page "filepath"}}`: Relative path containing the filename of the current page (e.g. "components/header.html").
-* `{{page "rel"}}`: Relative path to the root (e.g. "../").
+* `meta.version`: Current styleguide version (e.g. "1.7.0").
+* `meta.env`: `development` or `production`.
+* `meta.path.fileName`: The name of the current page file with extension (e.g. "index.html").
+* `meta.path.filePath`: Relative path containing the filename of the current page (e.g. "components/header.html").
+* `meta.path.toRoot`: Relative path to the root (e.g. "../").
 
 
 
 ### Images and Icons
-Located in `src/img`.  
 Output to `dev/img`, `prev/img` or `dist/img`.
 
-All files and folders placed in `src/img` will be copied to `dev/img`, `prev/img` or `dist/img`.
+All files and folders placed in `src/images` will be copied to `dev/img`, `prev/img` or `dist/img`.
 
-SVG files placed in the `src/img/icons` folder will be transformed into an [SVG icon sprite](https://github.com/jkphl/gulp-svg-sprite) named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/img/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
+SVG files placed in the `src/components/icons` folder will be transformed into an [SVG icon sprite](https://github.com/jkphl/gulp-svg-sprite) named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/components/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
 
 Icons can be used in HTML with the following syntax:
 ```html
 <svg width="24" height="24">
-  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use>
+  <use xlink:href="img/icons.svg#filename-icon"></use>
 </svg>
 ```
 
