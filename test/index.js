@@ -1,15 +1,11 @@
-'use strict';
-
-
+'use strict'
 
 /* DEPENDENCIES
  * ========================================================================== */
 
-const styleguideInit = require('../');
-
-
+const styleguideInit = require('../')
 
 /* DEPENDENCIES
  * ========================================================================== */
 
-styleguideInit('./temp');
+styleguideInit('./temp')

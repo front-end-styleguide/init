@@ -1,55 +1,67 @@
-'use strict';
-
-
+'use strict'
 
 /* DEPENDENCIES
  * ========================================================================== */
 
-const chalk  = require('chalk');
-const fs     = require('fs-extra');
-const path   = require('path');
-const prompt = require('prompt');
-const spawn  = require('child_process').spawn;
-
-
+const chalk = require('chalk')
+const fs = require('fs-extra')
+const path = require('path')
+const prompt = require('prompt')
+const spawn = require('child_process').spawn
 
 /* INSTALL DEPENDENCIES
  * ========================================================================== */
 
-let installDependencies = (dir) => {
-  spawn('npm', [
-    'install', '--save',
-    'normalize.css',
-    'svgxuse'
-  ], {
-    cwd: dir,
-    shell: true,
-    stdio: 'inherit'
-  });
-};
+const installDependencies = (dir, styleguideVersion) => {
+  switch (styleguideVersion) {
+    case 2:
+      spawn('npm', [
+        'install', '--save',
+        'normalize.css',
+        'svgxuse'
+      ], { cwd: dir, shell: true, stdio: 'inherit' })
+      break
+    default:
+      spawn('npm', [
+        'install', '--save',
+        'normalize.css',
+        'svgxuse'
+      ], { cwd: dir, shell: true, stdio: 'inherit' })
+  }
+}
 
-let installDevDependencies = (dir) => {
-  spawn('npm', [
-    'install', '--save-dev',
-    'babel-preset-es2015',
-    'front-end-styleguide'
-  ], {
-    cwd: dir,
-    shell: true,
-    stdio: 'inherit'
-  });
-};
-
-
+const installDevDependencies = (dir, styleguideVersion) => {
+  switch (styleguideVersion) {
+    case 2:
+      spawn('npm', [
+        'install', '--save-dev',
+        'babel-preset-es2015',
+        'front-end-styleguide@2'
+      ], { cwd: dir, shell: true, stdio: 'inherit' })
+      break
+    default:
+      spawn('npm', [
+        'install', '--save-dev',
+        'babel-preset-es2015',
+        'eslint-config-standard',
+        'eslint-plugin-import',
+        'eslint-plugin-node',
+        'eslint-plugin-promise',
+        'eslint-plugin-standard',
+        'front-end-styleguide'
+      ], { cwd: dir, shell: true, stdio: 'inherit' })
+  }
+}
 
 /* CREATE PACKAGE.JSON
  * ========================================================================== */
 
-let createPackageJSON = (dir, data) => {
-  let packageJSON = {
+const createPackageJSON = (dir, data) => {
+  const packageJSON = {
     name: data.projectName,
     description: data.projectDescription,
     version: data.projectVersion,
+    author: `${data.authorName} <${data.authorEmail}>`,
     scripts: {
       start: './node_modules/.bin/front-end-styleguide',
       development: './node_modules/.bin/front-end-styleguide development',
@@ -57,113 +69,87 @@ let createPackageJSON = (dir, data) => {
       production: './node_modules/.bin/front-end-styleguide production',
       update: './node_modules/.bin/front-end-styleguide update'
     }
-  };
-
-  if (data.authorName) {
-    packageJSON.author = `${data.authorName} <${data.authorEmail}>`;
   }
 
-  fs.ensureDirSync(dir);
-
-  fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', (error) => {
+  fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', error => {
     if (error) {
-      console.error(error);
+      return console.error(error)
     }
 
-    installDependencies(dir);
-    installDevDependencies(dir);
-  });
-};
+    installDependencies(dir, data.styleguideVersion)
+    installDevDependencies(dir, data.styleguideVersion)
+  })
+}
 
-
-
-/* CREATE .GITIGNORE
+/* RENAME `gitignore` TO `.gitignore`
  * ========================================================================== */
 
-let createGitignore = (dir) => {
-  let gitignore =
-`# OS specific stuff
-Thumbs.db
-Desktop.ini
-.DS_Store
-._*
-*~
-
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Dependency directory
-node_modules
-
-# Generated content
-dev
-prev
-dist
-`;
-
-  fs.ensureDirSync(dir);
-
-  fs.writeFile(`${dir}/.gitignore`, gitignore, (error) => {
+const renameGitignore = dir => {
+  fs.move(`${dir}/gitignore`, `${dir}/.gitignore`, error => {
     if (error) {
-      console.error(error);
+      return console.error(error)
     }
-  });
-};
+  })
+}
 
-
-
-/* COPY EXAMPLE PROJECT
+/* COPY TEMPLATE
  * ========================================================================== */
 
-let createExampleContent = (dir, createExample) => {
-  fs.copy(`${__dirname}/init/${createExample ? 'example' : 'bare'}`, dir, (error) => {
+const copyTemplate = (dir, styleguideVersion, templateName) => {
+  fs.copy(`${__dirname}/templates/v${styleguideVersion}/${templateName}`, dir, error => {
     if (error) {
-      console.error(error);
+      return console.error(error)
     }
-  });
 
-  fs.copy(`${__dirname}/init/always`, `${dir}`, (error) => {
-    if (error) {
-      console.error(error);
-    }
-  });
-};
-
-
+    renameGitignore(dir)
+  })
+}
 
 /* INITIALIZE NEW PROJECT
  * ========================================================================== */
 
-module.exports = (dir) => {
+module.exports = dir => {
+  fs.ensureDirSync(dir)
+  const dirIsEmpty = fs.readdirSync(dir).length === 0
+
   console.log(`
 ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
-`);
+`)
 
-  let schema = {
+  const schema = {
     properties: {
-      useWizard: {
-        description: 'Generate package.json',
-        message: 'Please answer with Y or N.',
+      overwriteDir: {
+        description: 'This directory is not empty. Continue and clear all files and folders',
+        message: 'Please answer with yes or no.',
         type: 'string',
-        pattern: /^(Y|N)$/i,
-        default: 'Y',
+        pattern: /^(y[es]*|n[o]?)$/,
+        default: 'no',
         required: true,
+        ask: () => !dirIsEmpty,
         before: (value) => {
-          return value.toUpperCase() === 'Y';
+          if (value.match(/^(n|no)$/)) {
+            console.error('Initialization cancelled!')
+            process.kill(process.pid)
+          }
+
+          return value
         }
       },
-      createExample: {
-        description: 'Create example project',
-        message: 'Please answer with Y or N.',
+      styleguideVersion: {
+        description: 'Select Styleguide version',
+        message: 'Currently available: 2, 3.',
         type: 'string',
-        pattern: /^(Y|N)$/i,
-        default: 'Y',
-        required: true,
-        before: (value) => {
-          return value.toUpperCase() === 'Y';
-        }
+        pattern: /^[2,3]$/,
+        default: '3',
+        required: true
+      },
+      styleguideTemplate: {
+        description: 'Select project template',
+        message: 'Available templates: example, bare.',
+        type: 'string',
+        pattern: /^(example|bare)$/,
+        default: 'example',
+        required: true
       },
       projectName: {
         description: 'Project name',
@@ -171,17 +157,13 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
         type: 'string',
         pattern: /^[a-z|-]+$/,
         default: path.parse(dir).name.toLowerCase().replace(/[^a-z|-]/, '-'),
-        required: true,
-        ask: () => {
-          return prompt.history('useWizard').value;
-        }
+        required: true
       },
       projectDescription: {
         description: 'Project description',
+        message: 'Every project should have a short description.',
         type: 'string',
-        ask: () => {
-          return prompt.history('useWizard').value;
-        }
+        required: true
       },
       projectVersion: {
         description: 'Project version',
@@ -189,59 +171,54 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
         type: 'string',
         pattern: /^\d+\.\d+\.\d+$/,
         default: '1.0.0',
-        required: true,
-        ask: () => {
-          return prompt.history('useWizard').value;
-        }
+        required: true
       },
       authorName: {
         description: 'Author name',
+        message: 'Every project should have an author.',
         type: 'string',
-        ask: () => {
-          return prompt.history('useWizard').value;
-        }
+        required: true
       },
       authorEmail: {
         description: 'Author email',
         message: 'Please enter a valid email address.',
         type: 'string',
         pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i,
-        required: true,
-        ask: () => {
-          return prompt.history('useWizard').value && prompt.history('authorName').value;
-        }
+        required: true
       }
     }
-  };
+  }
 
-  prompt.message = null;
+  // Remove prompt question prefix
+  prompt.message = null
 
   prompt.get(schema, (error, result) => {
-    const successMessage = `
+    if (error) {
+      return console.error(error.message)
+    }
+
+    if (!result) {
+      return console.error('Initialization cancelled!')
+    }
+
+    if (result.overwriteDir.match(/^(y|yes)$/)) {
+      fs.emptyDirSync(dir)
+    }
+
+    console.log(`
 ${chalk.green(`Thank you. That's it!`)}
 Just wait a few more seconds for the finishing touches.
 
 ${chalk.italic('Installing npm packages…')}
-`;
+`)
 
-    if (!result) {
-      console.log('Initialization cancelled!');
-    } else if (!result.useWizard) {
-      console.log(successMessage);
-      installDevDependencies(dir);
-    } else {
-      console.log(successMessage);
-      createPackageJSON(dir, result);
-      createGitignore(dir);
-      createExampleContent(dir, result.createExample);
-    }
-  });
-};
+    createPackageJSON(dir, result)
+    copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+  })
+}
 
-
-
-/* EXPOSE DEFAULT CONFIGURATION FILES
+/* EXPOSE DEFAULT CONFIGURATION FILES (for v2, deprecated)
  * ========================================================================== */
 
-module.exports.configFile = require('./init/always/config/config.json');
-module.exports.pathsFile  = require('./init/always/config/paths.json');
+module.exports.configFile = require('./templates/v2/bare/config/config.json')
+module.exports.pathsFile = require('./templates/v2/bare/config/paths.json')

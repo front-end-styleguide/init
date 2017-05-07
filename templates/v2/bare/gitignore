@@ -13,5 +13,7 @@ npm-debug.log*
 # Dependency directory
 node_modules
 
-# Test
-temp
+# Generated content
+dev
+prev
+dist

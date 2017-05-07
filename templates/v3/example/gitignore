@@ -9,9 +9,13 @@ Desktop.ini
 logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Dependency directory
 node_modules
 
-# Test
-temp
+# Generated content
+dev
+prev
+dist

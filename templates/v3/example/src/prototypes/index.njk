@@ -1,0 +1,23 @@
+{% set pageTitle = "Homepage" %}
+{% set pageDescription = "Every page may have a short description." %}
+
+{% extends "../layouts/prototypes.njk" %}
+
+{% block body %}
+
+  <h1>{{ pageTitle }}</h1>
+  <h2>{{ pageDescription }}</h2>
+
+  <p>This is the homepage of the project. Go ahead and create an awesome prototype!</p>
+
+  <h2>Image Placeholders</h2>
+  <p>Use services like <a href="https://placehold.it/">Placehold.it</a> for image placeholders.</p>
+  <img src="https://placehold.it/350x200">
+  <img src="https://placehold.it/350x200">
+
+  <h2>SVG Icons</h2>
+  <svg width="96" height="96">
+    <use xlink:href="{{ meta.path.toRoot }}img/icons.svg#menu-icon"></use>
+  </svg>
+
+{% endblock %}
