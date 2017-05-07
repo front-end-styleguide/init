@@ -2,6 +2,17 @@
 
 
 
+## 2.0.0
+2017-05-07
+
+### Improved
+- Templating mechanism now supports arbitrary templates
+
+### Added
+- Template for Styleguide v3
+
+
+
 ## 1.2.4
 2017-03-22
 
