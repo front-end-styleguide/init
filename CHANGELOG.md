@@ -2,6 +2,14 @@
 
 
 
+## 2.0.1
+2017-05-07
+
+### Improved
+- Update readme for v3 templates
+
+
+
 ## 2.0.0
 2017-05-07
 
