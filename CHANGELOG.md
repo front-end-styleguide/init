@@ -2,6 +2,19 @@
 
 
 
+## 2.1.0
+2017-05-10
+
+### Improved
+- Directory clearance
+- Restructure v3 example template
+
+### Fixed
+- Missing `sg-background` class on component layout body
+- Missing relative paths in prototypes layout
+
+
+
 ## 2.0.1
 2017-05-07
 
