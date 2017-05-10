@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const prompt = require('prompt')
+const rimraf = require('rimraf')
 const spawn = require('child_process').spawn
 
 /* INSTALL DEPENDENCIES
@@ -119,7 +120,7 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
   const schema = {
     properties: {
       overwriteDir: {
-        description: 'This directory is not empty. Continue and clear all files and folders',
+        description: 'Directory is not empty. Continue and delete files (except .git and node_modules)',
         message: 'Please answer with yes or no.',
         type: 'string',
         pattern: /^(y[es]*|n[o]?)$/,
@@ -131,7 +132,6 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
             console.error('Initialization cancelled!')
             process.kill(process.pid)
           }
-
           return value
         }
       },
@@ -201,10 +201,6 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
       return console.error('Initialization cancelled!')
     }
 
-    if (result.overwriteDir.match(/^(y|yes)$/)) {
-      fs.emptyDirSync(dir)
-    }
-
     console.log(`
 ${chalk.green(`Thank you. That's it!`)}
 Just wait a few more seconds for the finishing touches.
@@ -212,13 +208,14 @@ Just wait a few more seconds for the finishing touches.
 ${chalk.italic('Installing npm packages…')}
 `)
 
-    createPackageJSON(dir, result)
-    copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+    if (result.overwriteDir.match(/^(y|yes)$/)) {
+      rimraf(`${dir}/**/*`, { glob: { dot: true, ignore: [`${dir}/.git/**`, `${dir}/node_modules/**`] } }, () => {
+        createPackageJSON(dir, result)
+        copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+      })
+    } else {
+      createPackageJSON(dir, result)
+      copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+    }
   })
 }
-
-/* EXPOSE DEFAULT CONFIGURATION FILES (for v2, deprecated)
- * ========================================================================== */
-
-module.exports.configFile = require('./templates/v2/bare/config/config.json')
-module.exports.pathsFile = require('./templates/v2/bare/config/paths.json')
