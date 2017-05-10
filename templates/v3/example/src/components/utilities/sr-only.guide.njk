@@ -1,0 +1,14 @@
+{% set title = "Screenreader Only" %}
+{% set description = "Hides elements visually but makes them still accessible for screenreaders." %}
+
+{% extends sgSection %}
+
+{% block body %}
+  <p>The following paragraph should not be visible. But if you inspect the source, it's really there!</p>
+  <p class="sr-only">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <hr>
+
+  <p>After this paragraph there is a link. If the link receives focus, it will be visible.</p>
+  <p><a href="#0" class="sr-only sr-only--focusable">I'm a link!</a>
+{% endblock %}

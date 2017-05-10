@@ -14,4 +14,4 @@ import 'svgxuse'
 // COMPONENTS
 // =========================================================
 
-import './components/example/scripts'
+import './components/example/example'

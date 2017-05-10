@@ -1,0 +1,36 @@
+{% set title = "Embed Responsive" %}
+{% set description = "Embed content with fixed aspect ratios. Useful for videos and iframes." %}
+
+{% extends sgSection %}
+
+{% block body %}
+  <h3>1:1</h3>
+
+  <div class="embed-responsive">
+    <iframe class="embed-responsive__content" src="https://www.youtube.com/embed/1jWCXJfxHQM?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <h3>2:1</h3>
+
+  <div class="embed-responsive embed-responsive--2:1">
+    <iframe class="embed-responsive__content" src="https://www.youtube.com/embed/1jWCXJfxHQM?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <h3>3:1</h3>
+
+  <div class="embed-responsive embed-responsive--3:1">
+    <iframe class="embed-responsive__content" src="https://www.youtube.com/embed/1jWCXJfxHQM?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <h3>4:3</h3>
+
+  <div class="embed-responsive embed-responsive--4:3">
+    <iframe class="embed-responsive__content" src="https://www.youtube.com/embed/1jWCXJfxHQM?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <h3>16:9</h3>
+
+  <div class="embed-responsive embed-responsive--16:9">
+    <iframe class="embed-responsive__content" src="https://www.youtube.com/embed/1jWCXJfxHQM?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+{% endblock %}

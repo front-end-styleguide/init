@@ -46,19 +46,19 @@
 /* ASPECT RATIO MODIFIERS
  * ====================================================== */
 
-.embed-responsive--2by1 {
+.embed-responsive--2\:1 {
   padding-bottom: 50%;
 }
 
-.embed-responsive--3by1 {
+.embed-responsive--3\:1 {
   padding-bottom: calc(100% / 3);
 }
 
-.embed-responsive--4by3 {
+.embed-responsive--4\:3 {
   padding-bottom: 75%;
 }
 
-.embed-responsive--16by9 {
+.embed-responsive--16\:9 {
   padding-bottom: 56.25%;
 }
 
