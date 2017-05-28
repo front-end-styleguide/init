@@ -2,6 +2,17 @@
 
 
 
+## 2.1.1
+2017-05-28
+
+### Improved
+- Template stylesheet order
+
+### Fixed
+- Package name regex
+
+
+
 ## 2.1.0
 2017-05-10
 
