@@ -155,8 +155,8 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
         description: 'Project name',
         message: 'The project name has to be lowercase, can contain dashes but no spaces.',
         type: 'string',
-        pattern: /^[a-z|-]+$/,
-        default: path.parse(dir).name.toLowerCase().replace(/[^a-z|-]/, '-'),
+        pattern: /^[^_][a-z\d-_]{1,213}$/,
+        default: path.parse(dir).name.toLowerCase().replace(/[^a-z\d-_]/, '-'),
         required: true
       },
       projectDescription: {
