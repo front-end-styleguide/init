@@ -2,6 +2,20 @@
 
 
 
+## 2.2.0
+2017-06-03
+
+### Improved
+- READMEs for v3 templates
+
+### Added
+- `.browserslistrc` to v3 templates
+
+### Updated
+- Dependencies
+
+
+
 ## 2.1.1
 2017-05-28
 
