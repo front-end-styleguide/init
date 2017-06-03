@@ -7,30 +7,28 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](https://st
 
 ## Contents
 1. [Prerequisites](#prerequisites)
-2. [Installation](#installation)
-3. [Configuration](#configuration)
-4. [Usage](#usage)
+-  [Installation](#installation)
+-  [Configuration](#configuration)
+-  [Folder Structure](#folder-structure)
+-  [Usage](#usage)
   1. [Tasks](#tasks)
-  2. [CSS](#css)
-  3. [JavaScript](#javascript)
-  4. [HTML](#html)
-  5. [Images and Icons](#images-and-icons)
-  6. [Copy](#copy)
-5. [Credits](#credits)
+  -  [CSS](#css)
+  -  [JavaScript](#javascript)
+  -  [HTML](#html)
+  -  [Images and Icons](#images-and-icons)
+  -  [Copy](#copy)
+-  [Credits](#credits)
 
 
 ## Prerequisites
 * [Node.js with npm](https://nodejs.org/)
-* [Front End Styleguide](https://github.com/mvsde/styleguide)
 
 
 ## Installation
-Make sure CLI is installed globally with `npm install -g front-end-styleguide-cli`.
-If you don't want to or cannot install the CLI please use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
+Make sure CLI is installed globally with `npm install -g front-end-styleguide-cli`.  
+Run `front-end-styleguide init` to start a new project.
 
-Run `npm install` to get all dependencies. `npm update` will install and update all dependencies.
-
-*To check for outdated packages without updating them run `npm outdated`.*
+If you don't want to or cannot install the CLI please use `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`. This requires a local installation: `npm install front-end-styleguide`.
 
 
 ## Configuration
@@ -48,7 +46,7 @@ Run `npm install` to get all dependencies. `npm update` will install and update 
       /* Sass options */
     },
     "autoprefixer": {
-      /* Autoprefixer options */
+      /* Autoprefixer options (deprecated, use .browserslistrc instead) */
     }
   },
   "html": {
@@ -94,6 +92,7 @@ Run `npm install` to get all dependencies. `npm update` will install and update 
 ### Dotfiles
 
 * `.babelrc`: [Configuration for Babel](https://babeljs.io/docs/usage/babelrc/)
+* `.browserslistrc`: [Set supported browsers](https://github.com/ai/browserslist)
 * `.editorconfig`: [Set basic rules for editors/IDEs](http://editorconfig.org/)
 * `.eslintignore`: [Files ignored by ESLint](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)
 * `.eslintrc.json`: [Configuration and rules for ESLint](http://eslint.org/docs/user-guide/configuring)
@@ -127,6 +126,7 @@ Run `npm install` to get all dependencies. `npm update` will install and update 
 |   ├── main.js
 |   └── main.scss
 ├── .babelrc
+├── .browserslistrc
 ├── .editorconfig
 ├── .eslintignore
 ├── .eslint.rc
