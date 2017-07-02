@@ -2,6 +2,19 @@
 
 
 
+## 2.3.0
+2017-07-02
+
+### Added
+- stylelint
+- `test`-script for v3 package.json
+
+### Updated
+- Dependencies
+- template readmes
+
+
+
 ## 2.2.0
 2017-06-03
 
