@@ -82,7 +82,7 @@ This styleguide splits the CSS into small parts. This ensures a better organizat
 
 The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
 
-Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-enable selector-no-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
+Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-enable selector-max-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
 
 *The development task generates sourcemaps. The preview and production tasks minify the CSS.*
 

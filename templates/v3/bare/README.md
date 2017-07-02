@@ -7,17 +7,18 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile and [lint](https://st
 
 ## Contents
 1. [Prerequisites](#prerequisites)
--  [Installation](#installation)
--  [Configuration](#configuration)
--  [Folder Structure](#folder-structure)
--  [Usage](#usage)
-  1. [Tasks](#tasks)
-  -  [CSS](#css)
-  -  [JavaScript](#javascript)
-  -  [HTML](#html)
-  -  [Images and Icons](#images-and-icons)
-  -  [Copy](#copy)
--  [Credits](#credits)
+1. [Installation](#installation)
+1. [Configuration](#configuration)
+1. [Folder Structure](#folder-structure)
+1. [Usage](#usage)
+   1. [Tasks](#tasks)
+   1. [CSS](#css)
+   1. [JavaScript](#javascript)
+   1. [HTML](#html)
+   1. [Images and Icons](#images-and-icons)
+   1. [Copy](#copy)
+1. [Branding](#branding)
+1. [Credits](#credits)
 
 
 ## Prerequisites
@@ -167,13 +168,13 @@ There are more tasks available for standalone execution:
 ### CSS
 Output to `dev/css`, `prev/css` or `dist/css`.
 
-[Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide). [stylelint](http://stylelint.io/) monitors the code for errors and consistency deviations.
+[Sass](http://sass-lang.com/) is a CSS preprocessor supporting variables, nesting and mixins – among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide). [stylelint](http://stylelint.io/) monitors the code for errors and consistency deviations. It uses the [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) with a few rule additions.
 
 This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own folder and is re-usable across the project.
 
 The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/main.scss` for more information.
 
-Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-enable selector-no-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
+Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.stylelintrc.json`. Per-file rules can be set comments (e.g. `/* stylelint-disable selector-max-id */`). With a `.stylelintignore` file in the project root, CSS files can be [excluded from linting](http://stylelint.io/user-guide/configuration/#stylelintignore).
 
 *The development task generates sourcemaps. The preview and production tasks minify the CSS.*
 
@@ -301,6 +302,33 @@ module.exports = [
 ];
 ```
 Everything from `node_modules/@polymer/font-roboto` will be copied to `taskfolder/polymer`. No `font-roboto` folder will be created.
+
+
+## Branding
+
+The styleguide provides branding capabilities for the navigation bar and the component pages. Custom colors and an logo can be set.
+
+Create the file `config/branding.json` to turn branding on. If no branding-file was found, the default colors from the styleguide will be used.
+
+The following options are available:
+
+```json
+{
+  "css": {
+    "color-primary": "#f88",
+    "color-secondary": "#999",
+    "color-text": "#000",
+    "color-background": "#ddd"
+  },
+  "logo": {
+    "icon": "filename.svg",
+    "title": "Title for the link",
+    "url": "https://example.com/"
+  }
+}
+```
+
+The icon-file has to be a square SVG placed in the `config`-folder. It will be inlined by Nunjucks.
 
 
 ## Credits

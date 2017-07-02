@@ -49,7 +49,8 @@ const installDevDependencies = (dir, styleguideVersion) => {
         'eslint-plugin-node',
         'eslint-plugin-promise',
         'eslint-plugin-standard',
-        'front-end-styleguide'
+        'front-end-styleguide',
+        'stylelint-config-standard'
       ], { cwd: dir, shell: true, stdio: 'inherit' })
   }
 }
