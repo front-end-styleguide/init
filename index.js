@@ -73,6 +73,14 @@ const createPackageJSON = (dir, data) => {
     }
   }
 
+  // Expand package.json depending on the styleguide version
+  switch (data.styleguideVersion) {
+    case 2:
+      break
+    default:
+      packageJSON.scripts.test = './node_modules/.bin/front-end-styleguide test'
+  }
+
   fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', error => {
     if (error) {
       return console.error(error)
@@ -139,7 +147,7 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
       styleguideVersion: {
         description: 'Select Styleguide version',
         message: 'Currently available: 2, 3.',
-        type: 'string',
+        type: 'number',
         pattern: /^[2,3]$/,
         default: '3',
         required: true
