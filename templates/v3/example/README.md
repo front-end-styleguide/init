@@ -322,13 +322,14 @@ The following options are available:
   },
   "logo": {
     "icon": "filename.svg",
+    "logo": "another-filename.svg",
     "title": "Title for the link",
     "url": "https://example.com/"
   }
 }
 ```
 
-The icon-file has to be a square SVG placed in the `config`-folder. It will be inlined by Nunjucks.
+The icon and logo have to be SVG files. The icon must be square but the logo can have any aspect ratio. Make sure to include a `width="x"` and `height=""` to limit the logo dimensions. Both files have to be placed in the `config`-folder and will be inlined with Nunjucks.
 
 
 ## Credits
