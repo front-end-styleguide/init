@@ -2,6 +2,13 @@
 
 
 
+## 2.4.0
+2017-07-04
+
+### Improved
+- Component layout for new branding capabilities
+
+
 ## 2.3.0
 2017-07-02
 
