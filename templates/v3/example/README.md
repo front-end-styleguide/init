@@ -240,14 +240,16 @@ All files and folders placed in `src/images` will be copied to `dev/img`, `prev/
 
 SVG files placed in the `src/components/icons` folder will be transformed into an [SVG icon sprite](https://github.com/jkphl/gulp-svg-sprite) named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/components/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
 
-Icons can be used in HTML with the following syntax:
-```html
-<svg width="24" height="24">
-  <use xlink:href="img/icons.svg#filename-icon"></use>
-</svg>
-```
+Use the icon macro for easy icon linking. The macro takes the following parameters:
+* `filename`: The icon filename in the `src/components/icons`-folder.
+* `classes`: Additional classes separated with whitespace.
+* `size`: The initial icon size set with `width` and `height` attributes. Defaults to `24`.
+* `ariaHidden`: Show (`false`) or hide (`true`) the icon for screen readers. Defaults to `true`.
 
-Specifying dimensions is considered good style. Without a defined width and height browsers often scale SVGs to fill the whole viewport. This happens if dimensions set in CSS fail to load.
+```njk
+{% import "path/to/components/icons/icons.njk" as icon %}
+{{ icon.link('filename', 'classes', size, ariaHidden) }}
+```
 
 The styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.
 

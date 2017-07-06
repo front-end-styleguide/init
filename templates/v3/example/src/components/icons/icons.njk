@@ -1,0 +1,5 @@
+{% macro link(icon, classes, size = 24, ariaHidden = true) %}
+  <svg class="icon{{ ' ' + classes if classes }}" width="{{ size }}" height="{{ size }}"{{ ' aria-hidden="true"' | safe if ariaHidden }}>
+    <use xlink:href="{{ meta.path.toRoot }}img/icons.svg#{{ icon }}-icon"></use>
+  </svg>
+{% endmacro %}
