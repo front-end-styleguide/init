@@ -129,7 +129,7 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
   const schema = {
     properties: {
       overwriteDir: {
-        description: 'Directory is not empty. Continue and delete files (except .git and node_modules)',
+        description: 'Directory is not empty. Continue and delete files (except .git and node_modules) [yes/no]',
         message: 'Please answer with yes or no.',
         type: 'string',
         pattern: /^(y[es]*|n[o]?)$/,
@@ -145,15 +145,18 @@ ${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
         }
       },
       styleguideVersion: {
-        description: 'Select Styleguide version',
+        description: 'Select Styleguide version [2, 3]',
         message: 'Currently available: 2, 3.',
-        type: 'number',
-        pattern: /^[2,3]$/,
+        type: 'string',
+        pattern: /^[23]$/,
         default: '3',
-        required: true
+        required: true,
+        before: (value) => {
+          return parseInt(value)
+        }
       },
       styleguideTemplate: {
-        description: 'Select project template',
+        description: 'Select project template [example, bare]',
         message: 'Available templates: example, bare.',
         type: 'string',
         pattern: /^(example|bare)$/,
