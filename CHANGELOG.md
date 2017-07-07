@@ -2,6 +2,14 @@
 
 
 
+## 2.5.0
+2017-07-07
+
+### Improved
+- Switch to a more interactive CLI
+
+
+
 ## 2.4.0
 2017-07-04
 
