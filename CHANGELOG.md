@@ -8,6 +8,9 @@
 ### Improved
 - Switch to a more interactive CLI
 
+### Fixed
+- Icon documentation
+
 
 
 ## 2.4.0
