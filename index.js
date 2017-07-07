@@ -5,17 +5,17 @@
 
 const chalk = require('chalk')
 const fs = require('fs-extra')
+const inquirer = require('inquirer')
 const path = require('path')
-const prompt = require('prompt')
 const rimraf = require('rimraf')
 const spawn = require('child_process').spawn
 
 /* INSTALL DEPENDENCIES
  * ========================================================================== */
 
-const installDependencies = (dir, styleguideVersion) => {
-  switch (styleguideVersion) {
-    case 2:
+const installDependencies = (dir, version) => {
+  switch (version) {
+    case 'v2':
       spawn('npm', [
         'install', '--save',
         'normalize.css',
@@ -31,9 +31,9 @@ const installDependencies = (dir, styleguideVersion) => {
   }
 }
 
-const installDevDependencies = (dir, styleguideVersion) => {
-  switch (styleguideVersion) {
-    case 2:
+const installDevDependencies = (dir, version) => {
+  switch (version) {
+    case 'v2':
       spawn('npm', [
         'install', '--save-dev',
         'babel-preset-es2015',
@@ -59,11 +59,12 @@ const installDevDependencies = (dir, styleguideVersion) => {
  * ========================================================================== */
 
 const createPackageJSON = (dir, data) => {
+  // Base package.json information
   const packageJSON = {
-    name: data.projectName,
-    description: data.projectDescription,
-    version: data.projectVersion,
-    author: `${data.authorName} <${data.authorEmail}>`,
+    name: data.project.name,
+    description: data.project.description,
+    version: data.project.version,
+    author: `${data.author.name} <${data.author.email}>`,
     scripts: {
       start: './node_modules/.bin/front-end-styleguide',
       development: './node_modules/.bin/front-end-styleguide development',
@@ -74,8 +75,8 @@ const createPackageJSON = (dir, data) => {
   }
 
   // Expand package.json depending on the styleguide version
-  switch (data.styleguideVersion) {
-    case 2:
+  switch (data.styleguide.version) {
+    case 'v2':
       break
     default:
       packageJSON.scripts.test = './node_modules/.bin/front-end-styleguide test'
@@ -86,8 +87,8 @@ const createPackageJSON = (dir, data) => {
       return console.error(error)
     }
 
-    installDependencies(dir, data.styleguideVersion)
-    installDevDependencies(dir, data.styleguideVersion)
+    installDependencies(dir, data.styleguide.version)
+    installDevDependencies(dir, data.styleguide.version)
   })
 }
 
@@ -105,8 +106,8 @@ const renameGitignore = dir => {
 /* COPY TEMPLATE
  * ========================================================================== */
 
-const copyTemplate = (dir, styleguideVersion, templateName) => {
-  fs.copy(`${__dirname}/templates/v${styleguideVersion}/${templateName}`, dir, error => {
+const copyTemplate = (dir, data) => {
+  fs.copy(`${__dirname}/templates/${data.styleguide.version}/${data.styleguide.template}`, dir, error => {
     if (error) {
       return console.error(error)
     }
@@ -120,114 +121,149 @@ const copyTemplate = (dir, styleguideVersion, templateName) => {
 
 module.exports = dir => {
   fs.ensureDirSync(dir)
-  const dirIsEmpty = fs.readdirSync(dir).length === 0
 
-  console.log(`
-${chalk.black.bgWhite(' Front End Styleguide Initialization ')}
+  console.log(chalk`
+
+{bold.blue ╔═════════════════════════════════════╗}
+
+{bold.blue ║} {bold Front-End-Styleguide Initialization} {bold.blue ║}
+
+{bold.blue ╚═════════════════════════════════════╝}
+
 `)
 
-  const schema = {
-    properties: {
-      overwriteDir: {
-        description: 'Directory is not empty. Continue and delete files (except .git and node_modules) [yes/no]',
-        message: 'Please answer with yes or no.',
-        type: 'string',
-        pattern: /^(y[es]*|n[o]?)$/,
-        default: 'no',
-        required: true,
-        ask: () => !dirIsEmpty,
-        before: (value) => {
-          if (value.match(/^(n|no)$/)) {
-            console.error('Initialization cancelled!')
-            process.kill(process.pid)
-          }
-          return value
-        }
-      },
-      styleguideVersion: {
-        description: 'Select Styleguide version [2, 3]',
-        message: 'Currently available: 2, 3.',
-        type: 'string',
-        pattern: /^[23]$/,
-        default: '3',
-        required: true,
-        before: (value) => {
-          return parseInt(value)
-        }
-      },
-      styleguideTemplate: {
-        description: 'Select project template [example, bare]',
-        message: 'Available templates: example, bare.',
-        type: 'string',
-        pattern: /^(example|bare)$/,
-        default: 'example',
-        required: true
-      },
-      projectName: {
-        description: 'Project name',
-        message: 'The project name has to be lowercase, can contain dashes but no spaces.',
-        type: 'string',
-        pattern: /^[^_][a-z\d-_]{1,213}$/,
-        default: path.parse(dir).name.toLowerCase().replace(/[^a-z\d-_]/, '-'),
-        required: true
-      },
-      projectDescription: {
-        description: 'Project description',
-        message: 'Every project should have a short description.',
-        type: 'string',
-        required: true
-      },
-      projectVersion: {
-        description: 'Project version',
-        message: 'The version has to follow Semantic Versioning (http://semver.org).',
-        type: 'string',
-        pattern: /^\d+\.\d+\.\d+$/,
-        default: '1.0.0',
-        required: true
-      },
-      authorName: {
-        description: 'Author name',
-        message: 'Every project should have an author.',
-        type: 'string',
-        required: true
-      },
-      authorEmail: {
-        description: 'Author email',
-        message: 'Please enter a valid email address.',
-        type: 'string',
-        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i,
-        required: true
+  const projectInitilization = (dir, data) => {
+    console.log(chalk`
+
+{bold.green Thank you, that’s it!}
+
+Just wait a minute for the finishing touches.
+
+`)
+
+    const rimrafOptions = {
+      glob: {
+        dot: true,
+        ignore: [`${dir}/.git/**`, `${dir}/node_modules/**`]
       }
     }
+
+    rimraf(`${dir}/**/*`, rimrafOptions, () => {
+      createPackageJSON(dir, data)
+      copyTemplate(dir, data)
+    })
   }
 
-  // Remove prompt question prefix
-  prompt.message = null
-
-  prompt.get(schema, (error, result) => {
-    if (error) {
-      return console.error(error.message)
+  const questionOverwrite = [
+    {
+      type: 'confirm',
+      name: 'overwrite',
+      message: 'Directory is not empty. Continue and clean directory (.git and node_modules will be preserved)',
+      default: false,
+      when () {
+        return fs.readdirSync(dir).length > 0
+      }
     }
+  ]
 
-    if (!result) {
-      return console.error('Initialization cancelled!')
+  const questionList = [
+    {
+      type: 'list',
+      name: 'styleguide.version',
+      message: 'Select the styleguide version',
+      choices: fs.readdirSync(`${__dirname}/templates`),
+      default: 'v3'
+    },
+    {
+      type: 'list',
+      name: 'styleguide.template',
+      message: 'Select the styleguide template',
+      choices (answers) {
+        return fs.readdirSync(`${__dirname}/templates/${answers.styleguide.version}`)
+      },
+      default: 'example'
+    },
+    {
+      type: 'input',
+      name: 'project.name',
+      message: 'Project name',
+      default: path.parse(dir).name.toLowerCase().replace(/[^a-z\d-_]/, '-'),
+      validate (value) {
+        if (value.match(/^[^_.][a-z\d-_.]{1,213}$/)) {
+          return true
+        }
+
+        return chalk`Please follow these rules:
+   - Max 214 characters
+   - Can’t start with dot or underscore
+   - Can contain dashes, dots and underscores elsewhere`
+      },
+      filter (value) {
+        return value.toLowerCase()
+      }
+    },
+    {
+      type: 'input',
+      name: 'project.description',
+      message: 'Project description',
+      validate (value) {
+        if (value) {
+          return true
+        }
+
+        return 'Please enter a short description.'
+      }
+    },
+    {
+      type: 'input',
+      name: 'project.version',
+      message: 'Project version',
+      default: '1.0.0',
+      validate (value) {
+        if (value.match(/^\d+\.\d+\.\d+$/)) {
+          return true
+        }
+
+        return chalk`Please follow Semantic Versioning ({blue http://semver.org}).`
+      }
+    },
+    {
+      type: 'input',
+      name: 'author.name',
+      message: 'Author name',
+      validate (value) {
+        if (value) {
+          return true
+        }
+
+        return 'Don’t you have a name?'
+      }
+    },
+    {
+      type: 'input',
+      name: 'author.email',
+      message: 'Author email',
+      validate (value) {
+        if (value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i)) {
+          return true
+        }
+
+        return 'Please enter a valid email address.'
+      }
     }
+  ]
 
-    console.log(`
-${chalk.green(`Thank you. That's it!`)}
-Just wait a few more seconds for the finishing touches.
-
-${chalk.italic('Installing npm packages…')}
-`)
-
-    if (result.overwriteDir.match(/^(y|yes)$/)) {
-      rimraf(`${dir}/**/*`, { glob: { dot: true, ignore: [`${dir}/.git/**`, `${dir}/node_modules/**`] } }, () => {
-        createPackageJSON(dir, result)
-        copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+  inquirer.prompt(questionOverwrite).then(answers => {
+    if (answers.overwrite) {
+      inquirer.prompt(questionList).then(answers => {
+        projectInitilization(dir, answers)
       })
     } else {
-      createPackageJSON(dir, result)
-      copyTemplate(dir, result.styleguideVersion, result.styleguideTemplate)
+      console.log(chalk`
+
+{bold.red Initialization cancelled}
+
+`)
     }
   })
 }
