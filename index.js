@@ -5,10 +5,25 @@
 
 const chalk = require('chalk')
 const fs = require('fs-extra')
+const gitConfigPath = require('git-config-path')
 const inquirer = require('inquirer')
+const parseGitConfig = require('parse-git-config')
 const path = require('path')
 const rimraf = require('rimraf')
 const spawn = require('child_process').spawn
+
+/* GIT CONFIG
+ * ========================================================================== */
+
+const gitConfigLocal = parseGitConfig.sync({
+  cwd: '/',
+  path: gitConfigPath({ cwd: __dirname })
+})
+
+const gitConfigGlobal = parseGitConfig.sync({
+  cwd: '/',
+  path: gitConfigPath('global')
+})
 
 /* INSTALL DEPENDENCIES
  * ========================================================================== */
@@ -231,6 +246,17 @@ Just wait a minute for the finishing touches.
       type: 'input',
       name: 'author.name',
       message: 'Author name',
+      default () {
+        if (gitConfigLocal.user && gitConfigLocal.user.name) {
+          return gitConfigLocal.user.name
+        }
+
+        if (gitConfigGlobal.user && gitConfigGlobal.user.name) {
+          return gitConfigGlobal.user.name
+        }
+
+        return null
+      },
       validate (value) {
         if (value) {
           return true
@@ -243,6 +269,17 @@ Just wait a minute for the finishing touches.
       type: 'input',
       name: 'author.email',
       message: 'Author email',
+      default () {
+        if (gitConfigLocal.user && gitConfigLocal.user.email) {
+          return gitConfigLocal.user.email
+        }
+
+        if (gitConfigGlobal.user && gitConfigGlobal.user.email) {
+          return gitConfigGlobal.user.email
+        }
+
+        return null
+      },
       validate (value) {
         if (value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i)) {
           return true
