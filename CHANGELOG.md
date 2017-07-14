@@ -2,6 +2,19 @@
 
 
 
+## 2.6.0
+2017-07-14
+
+### Added
+- Use Git config for author suggestions
+- Questions for private project and license
+- Use Git config for repository and bugs
+
+### Updated
+- Dependencies
+
+
+
 ## 2.5.0
 2017-07-07
 
