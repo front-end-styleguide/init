@@ -6,6 +6,7 @@
 const chalk = require('chalk')
 const fs = require('fs-extra')
 const gitConfigPath = require('git-config-path')
+const gitUp = require('git-up')
 const inquirer = require('inquirer')
 const parseGitConfig = require('parse-git-config')
 const path = require('path')
@@ -92,6 +93,24 @@ const createPackageJSON = (dir, data) => {
 
   if (data.private) {
     packageJSON.private = true
+  }
+
+  // Create Git URL and issues from remote
+  if (gitConfigLocal['remote "origin"']) {
+    let remote = gitUp(gitConfigLocal['remote "origin"'].url)
+    let path = remote.pathname
+      .substring(0, remote.pathname.lastIndexOf('.git'))
+    let url = `https://${remote.resource}${path}`
+
+    packageJSON.repository = {
+      type: 'git',
+      url
+    }
+
+    packageJSON.bugs = {
+      url: `${url}/issues`,
+      email: data.author.email
+    }
   }
 
   // Expand package.json depending on the styleguide version
