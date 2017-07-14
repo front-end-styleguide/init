@@ -2,6 +2,14 @@
 
 
 
+## 2.6.1
+2017-07-14
+
+### Fixed
+- Overwrite confirmation
+
+
+
 ## 2.6.0
 2017-07-14
 
