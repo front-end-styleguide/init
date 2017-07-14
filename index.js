@@ -346,16 +346,16 @@ Just wait a minute for the finishing touches.
   ]
 
   inquirer.prompt(questionOverwrite).then(answers => {
-    if (answers.overwrite) {
-      inquirer.prompt(questionList).then(answers => {
-        projectInitilization(dir, answers)
-      })
-    } else {
+    if (('overwrite' in answers) && !answers.overwrite) {
       console.log(chalk`
 
 {bold.red Initialization cancelled}
 
 `)
+    } else {
+      inquirer.prompt(questionList).then(answers => {
+        projectInitilization(dir, answers)
+      })
     }
   })
 }
