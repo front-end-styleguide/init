@@ -86,7 +86,12 @@ const createPackageJSON = (dir, data) => {
       preview: './node_modules/.bin/front-end-styleguide preview',
       production: './node_modules/.bin/front-end-styleguide production',
       update: './node_modules/.bin/front-end-styleguide update'
-    }
+    },
+    license: data.private ? 'UNLICENSED' : data.license
+  }
+
+  if (data.private) {
+    packageJSON.private = true
   }
 
   // Expand package.json depending on the styleguide version
@@ -173,7 +178,7 @@ Just wait a minute for the finishing touches.
     {
       type: 'confirm',
       name: 'overwrite',
-      message: 'Directory is not empty. Continue and clean directory (.git and node_modules will be preserved)',
+      message: 'Directory not empty! Continue and clean directory (‘.git’ and ‘node_modules’ are kept)',
       default: false,
       when () {
         return fs.readdirSync(dir).length > 0
@@ -221,6 +226,9 @@ Just wait a minute for the finishing touches.
       type: 'input',
       name: 'project.description',
       message: 'Project description',
+      default (answers) {
+        return `Living styleguide for ${answers.project.name}`
+      },
       validate (value) {
         if (value) {
           return true
@@ -286,6 +294,34 @@ Just wait a minute for the finishing touches.
         }
 
         return 'Please enter a valid email address.'
+      }
+    },
+    {
+      type: 'confirm',
+      name: 'private',
+      message: 'Flag project as private'
+    },
+    {
+      type: 'list',
+      name: 'license',
+      message: 'Select a license',
+      choices: [
+        'MIT',
+        'Apache-2.0',
+        'GPL-3.0',
+        new inquirer.Separator(),
+        'Custom'
+      ],
+      when (answers) {
+        return !answers.private
+      }
+    },
+    {
+      type: 'input',
+      name: 'license',
+      message: 'Enter a custom license (https://spdx.org/licenses/)',
+      when (answers) {
+        return answers.license === 'Custom'
       }
     }
   ]
