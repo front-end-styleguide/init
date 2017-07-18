@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "start": "./node_modules/.bin/front-end-styleguide",
+    "development": "./node_modules/.bin/front-end-styleguide development",
+    "preview": "./node_modules/.bin/front-end-styleguide preview",
+    "production": "./node_modules/.bin/front-end-styleguide production"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "front-end-styleguide": "^2.5.4",
+    "stylelint-config-standard": "^17.0.0"
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0",
+    "svgxuse": "^1.2.4"
+  }
+}
