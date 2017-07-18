@@ -12,7 +12,7 @@
   "repository": "mvsde/styleguide-init",
   "dependencies": {
     "chalk": "^2.0.1",
-    "fs-extra": "^3.0.1",
+    "fs-extra": "^4.0.0",
     "git-config-path": "^1.0.1",
     "git-up": "^2.0.8",
     "inquirer": "^3.1.1",
@@ -26,8 +26,8 @@
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "stylelint": "^7.12.0",
-    "stylelint-config-standard": "^16.0.0"
+    "stylelint": "^8.0.0",
+    "stylelint-config-standard": "^17.0.0"
   },
   "engines": {
     "node": ">= 7.0.0"
