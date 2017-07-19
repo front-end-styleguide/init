@@ -2,6 +2,19 @@
 
 
 
+## 2.7.0
+2017-07-19
+
+### Improved
+- Simplify package by leveraging Node's module system
+
+### Updated
+- v3 template stylelint config
+- Dependencies
+- Template dependencies
+
+
+
 ## 2.6.1
 2017-07-14
 
