@@ -2,6 +2,23 @@
 
 
 
+## 2.8.0
+2017-07-25
+
+### Improved
+- Simplify Git config extraction
+- Reduced pre-defined template stylelint rules
+- Finishing message
+
+### Updated
+- Dependencies
+- README.md
+
+### Fixed
+- Wrong path in template
+
+
+
 ## 2.7.0
 2017-07-19
 
