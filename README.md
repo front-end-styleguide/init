@@ -5,20 +5,26 @@
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
 
-This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/mvsde/styleguide) to work correct.
+This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/mvsde/styleguide) to work correct. It is used by the [CLI](https://github.com/mvsde/styleguide-cli) package.
 
 
 ## Usage
 
-Install with `npm install --save-dev front-end-styleguide-init`.
+### Installation
+With Yarn:  
+`yarn add --dev front-end-styleguide-init`
 
-Integrate into other modules:
+With npm:  
+`npm install --save-dev front-end-styleguide-init`
+
+### Call the initialization
+
 ```js
-// Import the init package
-const frontEndStyleguideInit = require('front-end-styleguide-init')
+// Require the init package
+const styleguideInit = require('front-end-styleguide-init')
 
 // `dir` is the directory where the styleguide will be initialized
-frontEndStyleguideInit(dir)
+styleguideInit(dir)
 ```
 
 
