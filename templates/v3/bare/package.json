@@ -17,7 +17,6 @@
     "stylelint-config-standard": "^17.0.0"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0",
     "svgxuse": "^1.2.4"
   }
 }
