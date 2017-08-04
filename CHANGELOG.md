@@ -2,6 +2,23 @@
 
 
 
+## 2.9.0
+2017-08-04
+
+### Improved
+- Overhaul README.md
+- Replaced deprecated template variable
+- Replaced large example image with a reasonable one
+- Bare template is even barer
+
+### Updated
+- Meta information
+
+### Fixed
+- CSS linter error in template
+
+
+
 ## 2.8.0
 2017-07-25
 
