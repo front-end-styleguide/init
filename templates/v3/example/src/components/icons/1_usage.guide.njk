@@ -13,6 +13,6 @@
     <li><code>ariaHidden</code>: Show (<code>false</code>) or hide (<code>true</code>) the icon for screen readers. Defaults to <code>true</code></li>
   </ol>
 
-<pre>{% raw %}{% import "../icons/icons.njk" as icon %}{% endraw %}
-{% raw %}{{ icon.link('filename', 'classes', size, ariaHidden) }}{% endraw %}</pre>
+  <pre><code>{% raw %}{% import "../icons/icons.njk" as icon %}
+{{ icon.link('filename', 'classes', size, ariaHidden) }}{% endraw %}</code></pre>
 {% endblock %}

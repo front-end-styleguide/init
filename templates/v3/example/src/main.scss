@@ -9,24 +9,24 @@
 // SETUP
 // =========================================================
 
-@import '../node_modules/normalize.css/normalize';
-@import 'setup/variables';
-@import 'setup/scaffolding';
+@import "../node_modules/normalize.css/normalize";
+@import "setup/variables";
+@import "setup/scaffolding";
 
 // FUNCTIONS
 // =========================================================
 
-@import 'components/functions/svg-url';
+@import "functions/svg-url";
 
 // MIXINS
 // =========================================================
 
-@import 'components/mixins/sr-only';
+@import "mixins/sr-only";
 
 // COMPONENTS
 // =========================================================
 
-@import 'components/example/example';
-@import 'components/typography/headings';
-@import 'components/utilities/embed-responsive';
-@import 'components/utilities/sr-only';
+@import "components/example/example";
+@import "components/typography/headings";
+@import "components/utilities/embed-responsive";
+@import "components/utilities/sr-only";

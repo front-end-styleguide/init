@@ -20,14 +20,14 @@
   white-space: nowrap;
 }
 
-/* SHOW ON FOCUS
- *
- * Use in conjunction with `sr-only` to display content when
- * it's focused. Useful for "Skip to main content" links.
- *
- * Based on:
- * https://github.com/h5bp/html5-boilerplate
- * ====================================================== */
+// SHOW ON FOCUS
+//
+// Use in conjunction with `sr-only` to display content when
+// it's focused. Useful for "Skip to main content" links.
+//
+// Based on:
+// https://github.com/h5bp/html5-boilerplate
+// =========================================================
 
 @mixin sr-only-focusable {
   &:active,
