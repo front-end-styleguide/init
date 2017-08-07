@@ -1,12 +1,12 @@
 {
   "name": "front-end-styleguide-init",
   "version": "2.9.0",
-  "description": "Init for front-end-styleguide",
+  "description": "Templates to create the basic file structure needed for the Front End Styleguide",
   "author": {
     "name": "Fynn Becker",
     "email": "info@fynn-becker.de"
   },
-  "homepage": "http://front-end-style.guide",
+  "homepage": "https://front-end-style.guide",
   "repository": {
     "type": "git",
     "url": "https://github.com/front-end-styleguide/styleguide-init"

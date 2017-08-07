@@ -1,4 +1,4 @@
-# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Init for Front End Styleguide
+# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Front End Styleguide Init
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
