@@ -33,7 +33,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to
 
 ## Installation
 With Yarn:  
-`yarn add global front-end-styleguide-cli`
+`yarn global add front-end-styleguide-cli`
 
 With npm:  
 `npm install -g front-end-styleguide-cli`
@@ -51,31 +51,19 @@ If the folder already contains a Git repository, this information will be used t
 ### Styleguide
 `config/config.json`
 
-```js
+```json
 {
   "css": {
-    "dev": {
-     /* Sass options for development */
-    },
-    "dist": {
-      /* Sass options for production */
-    }
+    "dev": {},
+    "dist": {}
   },
   "html": {
-    "browsersync": {
-      /* Browsersync options */
-    }
+    "browsersync": {}
   },
   "img": {
-    "svgSpriteDev": {
-      /* SVG Sprite options for development */
-    },
-    "svgSpriteDist": {
-      /* SVG Sprite options for production */
-    },
-    "imagemin": {
-      /* Imagemin options */
-    }
+    "svgSpriteDev": {},
+    "svgSpriteDist": {},
+    "imagemin": {}
   }
 }
 ```
@@ -158,14 +146,14 @@ These are the main tasks:
   * Watches for file changes.
   * Starts Browsersync.
   * Opens the default web browser.
-* `front-end-styleguide development` to start the development task.
+* `front-end-styleguide build:dev` to start the development task.
   * Same as the default task.
   * No file watching / Browsersync.
-* `front-end-styleguide preview` to create a prototype preview.
+* `front-end-styleguide build:prev` to create a prototype preview.
   * Minifies CSS, JavaScript and images.
   * Doesn't generate component HTML.
   * Errors break pipe.
-* `front-end-styleguide production` to create production ready files.
+* `front-end-styleguide build` to create production ready files.
   * Minifies CSS, JavaScript and images.
   * Doesn't generate any HTML.
   * Errors break pipe.
@@ -350,7 +338,7 @@ The following options are available:
 }
 ```
 
-The icon and logo have to be SVG files. The icon must be square but the logo can have any aspect ratio. Make sure to include a `width="x"` and `height=""` to limit the logo dimensions. Both files have to be placed in the `config`-folder and will be inlined with Nunjucks.
+The icon and logo have to be SVG files. The icon must be square but the logo can have any aspect ratio. Make sure to set the `width` and `height` attributes to limit the logo dimensions. Both files have to be placed in the `config`-folder and will be inlined with Nunjucks.
 
 
 ## Credits
