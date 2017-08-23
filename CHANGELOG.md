@@ -2,6 +2,19 @@
 
 
 
+## 2.9.1
+2017-08-23
+
+### Improved
+- V3 template clean up
+- Readme
+
+### Updated
+- Dependencies
+- Templates with new Gulp task names
+
+
+
 ## 2.9.0
 2017-08-04
 
