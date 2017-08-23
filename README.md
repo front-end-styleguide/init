@@ -7,16 +7,17 @@
 This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/front-end-styleguide/styleguide) to work correct. It is used by the [CLI](https://github.com/front-end-styleguide/styleguide-cli) package.
 
 
+## Installation
+
+```bash
+# Yarn
+yarn add --dev front-end-styleguide-init
+
+# npm
+npm install --save-dev front-end-styleguide-init
+```
+
 ## Usage
-
-### Installation
-With Yarn:  
-`yarn add --dev front-end-styleguide-init`
-
-With npm:  
-`npm install --save-dev front-end-styleguide-init`
-
-### Call the initialization
 
 ```js
 // Require the init package
