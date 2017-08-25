@@ -4,7 +4,7 @@
 [![Dependencies][dependencies-image]][npm-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
-This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/front-end-styleguide/styleguide) to work correct. It is used by the [CLI](https://github.com/front-end-styleguide/styleguide-cli) package.
+This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/front-end-styleguide/core) to work correct. It is used by the [CLI](https://github.com/front-end-styleguide/cli) package.
 
 
 ## Installation
@@ -36,7 +36,7 @@ To test this package run `npm test`. Please note: This is not an automated test.
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide-init.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide-init
 
-[dependencies-image]: https://img.shields.io/david/front-end-styleguide/styleguide-init.svg?style=flat-square
+[dependencies-image]: https://img.shields.io/david/front-end-styleguide/init.svg?style=flat-square
 
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
 [standard-url]: https://standardjs.com
