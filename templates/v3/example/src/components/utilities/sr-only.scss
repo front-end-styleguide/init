@@ -2,15 +2,8 @@
  *
  * Visually hide elements but make them accessible to
  * screen reader and keyboard users.
- *
- * Optional class `.sr-only--focusable` to show element
- * when it receives focus.
  * ====================================================== */
 
-.sr-only {
+.sr-only:not(:focus):not(:active) {
   @include sr-only;
-}
-
-.sr-only--focusable {
-  @include sr-only-focusable;
 }
