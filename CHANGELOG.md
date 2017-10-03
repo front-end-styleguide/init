@@ -8,6 +8,18 @@
 ### Added
 - V4 template
 
+### Improved
+- Easier to parse package.json author
+- Don't ask clean questions if there's nothing to clean
+
+### Updated
+- New 2017 'sr-only'
+- Links
+- Dependencies
+
+### Fixed
+- Empty lines in console log
+
 
 
 ## 2.9.1
