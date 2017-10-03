@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "plugins": ["ava"],
+  "extends": [
+    "standard",
+    "plugin:ava/recommended",
+    "plugin:testcafe/recommended"
+  ],
+  "rules": {
+    "no-warning-comments": "warn"
+  }
+}

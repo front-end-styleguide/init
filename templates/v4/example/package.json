@@ -1,0 +1,53 @@
+{
+  "scripts": {
+    "dev": "node_modules/.bin/front-end-styleguide dev",
+    "build": "node_modules/.bin/front-end-styleguide build",
+    "build:dev": "node_modules/.bin/front-end-styleguide build:dev",
+    "lint": "run-s -n lint:js lint:css lint:html",
+    "lint:js": "eslint \"**/*.js\"",
+    "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
+    "lint:html": "node_modules/.bin/front-end-styleguide lint:html",
+    "test": "run-s -n test:unit test:e2e",
+    "test:unit": "nyc ava",
+    "test:e2e": "testcafe chrome,firefox test/e2e --app \"front-end-styleguide dev\" --app-init-delay 4000"
+  },
+  "ava": {
+    "verbose": true,
+    "files": ["test/unit/**/*.js"],
+    "require": ["babel-register"],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "all": true,
+    "include": ["src"],
+    "reporter": [
+      "text",
+      "html"
+    ]
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-plugin-istanbul": "^4.1.5",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-ava": "^4.2.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "front-end-styleguide": "^4.0.0",
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.2.1",
+    "stylelint": "^8.1.1",
+    "stylelint-config-sass-guidelines": "^3.1.0",
+    "testcafe": "^0.17.2"
+  },
+  "engines": {
+    "node": ">= 8.6.0"
+  }
+}
