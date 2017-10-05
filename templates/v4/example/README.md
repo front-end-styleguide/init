@@ -12,7 +12,7 @@ Pattern library framework for styleguide driven development with Sass, ES6+ and 
 1. [Project Structure](#project-structure)
 1. [Configuration](#configuration)
    1. [Branding](#branding)
-   1. [Dotfiles](#dotfiles)
+   1. [Config files](#config-files)
 1. [Usage](#usage)
    1. [Tasks](#tasks)
    1. [JavaScript](#javascript)
@@ -88,7 +88,7 @@ Located in `config/branding.scss`.
 
 Specify custom colors for the styleguide sidebar and component pages. Browser support for [CSS Custom Properties](http://caniuse.com/#feat=css-variables) is required. Unsopported browsers fall back to default colors.
 
-### Dotfiles
+### Config files
 
 * `.babelrc`: [Configuration for Babel](https://babeljs.io/docs/usage/babelrc/)
 * `.browserslistrc`: [Set supported browsers](https://github.com/ai/browserslist)
@@ -97,6 +97,7 @@ Specify custom colors for the styleguide sidebar and component pages. Browser su
 * `.eslintrc.json`: [Configuration and rules for ESLint](http://eslint.org/docs/user-guide/configuring)
 * `.stylelintignore`: [Files ignored by stylelint](https://stylelint.io/user-guide/configuration/#stylelintignore)
 * `.stylelintrc.json`: [Configuration and rules for Stylelint](https://stylelint.io/user-guide/configuration/)
+* `postcss.config.js`: [Configuration for PostCSS](https://github.com/postcss/postcss#webpack)
 
 
 ## Usage
@@ -147,6 +148,20 @@ Global [stylelint rules](http://stylelint.io/user-guide/rules/) are set in `.sty
 ### HTML
 
 [Nunjucks](https://mozilla.github.io/nunjucks/) is an HTML templating engine based on JavaScript. The styleguide creates static HTML from Nunjucks files. Take a look at the [templating docs](https://mozilla.github.io/nunjucks/templating.html) for further information on Nunjucks.
+
+#### Global variables, filters, and tags
+
+The styleguide adds a few custom gobal variables, filters, and tags.
+
+* `process.env`
+  * `NODE_ENV`: Returns `development` or `production` (`{{ process.env.NODE_ENV }}`)
+  * `FESG_ENV`: Returns `dev`, `build`, or `build:dev` (`{{ process.env.FESG_ENV }}`)
+* `fesg`
+  * `head`: Outputs CSS and JS links (`{{ fesg.head }}`)
+  * `sidebar`: Outputs the styleguide sidebar (`{{ fesg.sidebar }}`)
+  * `footer`: Outputs the styleuide footer (`{{ fesg.footer }}`)
+  * `components`: Returns the component template as a string (`fesg.components`)
+* `relative`: Custom filter to create relative URLs (`{{ "assets/water.jpg" | relative }}`)
 
 
 #### Components
