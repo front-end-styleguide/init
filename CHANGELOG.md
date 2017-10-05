@@ -2,6 +2,17 @@
 
 
 
+## 2.10.1
+2017-10-05
+
+### Added
+- `postcss.config.js` to v4 template
+
+### Improved
+- Expanded v4 template readme
+
+
+
 ## 2.10.0
 2017-10-03
 
