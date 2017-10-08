@@ -2,6 +2,15 @@
 
 
 
+## 2.10.2
+2017-10-08
+
+### Updated
+- V4 template
+- Dependencies
+
+
+
 ## 2.10.1
 2017-10-05
 
