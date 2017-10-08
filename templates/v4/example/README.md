@@ -178,18 +178,18 @@ Component pages are reference for UI elements. They will be generated only if th
 
 {% block body %}
 
-  {% section
-    title="Variant #1",
-    description="A short description"
-  %}
+  {% section title="Variant #1", description="A short description" %}
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis, unde.</p>
+  {% usage %}
+    A short description written in markdown. For example:
+    * usage instructions
+    * todos
+  {% code %}
+    <p>HTML code block</p>
+    <p>Highlighted with Prism.js</p>
   {% endsection %}
 
-  {% section
-    title="Variant #2",
-    description="A short description",
-    background="#fff"
-  %}
+  {% section title="Variant #2", description="A short description", background="#fff" %}
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In est ex porro.</p>
   {% endsection %}
 
