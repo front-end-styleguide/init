@@ -4,33 +4,10 @@
 [![Dependencies][dependencies-image]][npm-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
-This package creates the basic file structure needed for the [Front End Styleguide](https://github.com/front-end-styleguide/core) to work correct. It is used by the [CLI](https://github.com/front-end-styleguide/cli) package.
 
+## Deprecation notice
 
-## Installation
-
-```bash
-# Yarn
-yarn add --dev front-end-styleguide-init
-
-# npm
-npm install --save-dev front-end-styleguide-init
-```
-
-## Usage
-
-```js
-// Require the init package
-const styleguideInit = require('front-end-styleguide-init')
-
-// `dir` is the directory where the styleguide will be initialized
-styleguideInit(dir)
-```
-
-
-## Test
-
-To test this package run `npm test`. Please note: This is not an automated test. It requires command line inputs and manual inspection of the `test/temp` output folder.
+This package has been integrated into [CLI package](https://github.com/front-end-styleguide/cli). All templates have been moved to a separate [templates repository](https://github.com/front-end-styleguide/templates).
 
 
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide-init.svg?style=flat-square
